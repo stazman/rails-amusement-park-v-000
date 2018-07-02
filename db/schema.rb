@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_25_155749) do
+ActiveRecord::Schema.define(version: 2018_07_02_190258) do
 
   create_table "attractions", force: :cascade do |t|
     t.string "name"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_06_25_155749) do
     t.integer "happiness"
     t.integer "tickets"
     t.integer "height"
+    t.string "password_digest"
   end
 
 end
