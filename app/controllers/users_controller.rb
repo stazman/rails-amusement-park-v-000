@@ -5,19 +5,35 @@ class UsersController < ApplicationController
     end
 
     def create
+        # raise params.inspect
         @user = User.new(user_params)
         @user.save
-        redirect_to users_path(@user)
+        session[:user_id] = @user.id
+        redirect_to user_path(@user)
     end
 
     def show
-        @user = User.find(params[:id])
+        if logged_in?
+            @user = User.find(params[:id])
+        else
+            redirect_to "/"
+        end
     end
 
+
     private
+
 
     def user_params
         params.require(:user).permit(:name, :password, :password_digest, :height, :tickets, :happiness, :nausea, :admin)
     end
     
+    def require_login
+        return head(:forbidden) unless session.include? :user_id   
+    end
 end
+
+
+    # def user_filter
+    #     @user = User.find(params[:id])
+    # end

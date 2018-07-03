@@ -1,19 +1,23 @@
 class SessionController < ApplicationController
 
     def new
-        
     end
 
     def create
         # raise params.inspect
-        if current_user && current_user.valid?
-            signin
+        @user = User.find(params[:name])
+        if @user 
+            session[:user_id] = @user.id
             redirect_to user
         else
-            redirect_to signin
+            redirect_to "/"
         end
-        # session[:user_id] = params[@user.id]
         # redirect_to user_path
     end
 
+    def destroy
+        session.delete(:user_id)
+        @current_user = nil
+        redirect_to "/signin"
+    end
 end
