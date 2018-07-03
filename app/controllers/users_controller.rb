@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
     def create
         @user = User.find_or_create_by(user_params)
-        redirect_to 'users/#{@user.id}'
+        redirect_to users_path(@user)
     end
 
     def show
