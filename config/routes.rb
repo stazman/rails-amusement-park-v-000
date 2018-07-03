@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
     get '/signin', to: 'session#new'
     post '/signin', to: 'session#create'
-    
-    resources :users
+
+    resources :users, only: [:new, :create, :show, :edit, :update]
 
 
     # get '/users/new', to: 'users#new'
